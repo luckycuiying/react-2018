@@ -1,9 +1,19 @@
 function render(element,parentNode){
-    if(typeof element =='string'){
+    if(typeof element =='string'||typeof element =='number'){
         return parentNode.appendChild(document.createTextNode(element))
     }
+
     let type = element.type
     let props = element.props
+    if(type.isReactComponent){
+        let returnElement = new type(props).render()
+        type = returnElement.type
+        props = returnElement.props
+    }else if(typeof type == 'function'){
+        let returnElement =  type(props)
+        type = returnElement.type
+        props = returnElement.props
+    }
     let domEelement = document.createElement(type);
     for(let propsName in props  ){
         if(propsName == 'className'){

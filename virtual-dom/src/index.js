@@ -16,5 +16,15 @@ let element = React.createElement('h1',
 //         return React.createElement('h1',{className:'title'},this.props.title);
 //     }
 // }
-ReactDOM.render(element, document.getElementById('root'));
+function Welcome(props) {
+    return React.createElement("h1", null, "hello ", props.name, props.age);
+  }
+
+class Welcome1 extends React.Component{
+    render(){
+        return React.createElement("h1", null, "hello ", this.props.name, this.props.age)
+    }
+}
+let element2 = React.createElement(Welcome1,{name:'shitou',age:4})
+ReactDOM.render(element2, document.getElementById('root'));
 
