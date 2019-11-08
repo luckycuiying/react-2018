@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <title>React App</title>
+  </head>
+  <body>
+   <button id="counter-app"></button>
+    <script>
+
+
+class Component {
+    constructor(props){
+        this.props = props
+    }
+    createDOMFromDomString(domString){
+        let div = document.createElement('div')
+        div.innerHTML = domString;
+        return div.children[0]
+    }
+    setState(partcialState){
+        this.state = Object.assign(this.state,partcialState)
+        let oldElement = this.domElement;
+        let newElement = this.render()
+        oldElement.parentElement.replaceChild(newElement,oldElement)
+    }
+    renderElement(){
+        let htmlString = this.render();
+        this.domElement = this.createDOMFromDomString(htmlString)
+        this.domElement.addEventListener('click',this.add.bind(this));
+        return this.domElement
+    }
+    mount(container){
+        container.appendChild(this.renderElement())
+    }
+    
+}
+
+class Counter extends Component{
+    constructor(props){
+        super(props)
+        this.state ={
+            number:0
+        }
+    } 
+    add(){
+        this.setState({number:this.state.number+1})
+    }
+    render(){
+        return  `
+            <button id="counter-app">${this.props.name}: ${this.state.number}</button>
+
+           `
+    }
+}
+
+        let counterApp = document.getElementById('counter-app')
+        // counterApp.appendChild(new Counter({name:'石头'}).render())
+        new Counter({name:'石头'}).mount(counterApp)
+    </script>
+  </body>
+</html>
