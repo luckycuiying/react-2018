@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Panel from './components/Context'
-import Pure from './components/PureComponent'
+import Pure from './components/PureFunComponent'
+import Logger from './components/high/Logger'
 
-
-ReactDOM.render(<Pure />,document.getElementById('root'))
+ReactDOM.render(<Logger />,document.getElementById('root'))
